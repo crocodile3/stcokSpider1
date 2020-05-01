@@ -86,6 +86,7 @@ class EastMoney:
                         post_date=post_date,
                         comment_list=comment_list
                     )
+                    return info
 
 
 if __name__ == '__main__':
