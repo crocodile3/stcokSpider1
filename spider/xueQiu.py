@@ -40,7 +40,7 @@ headers ={
     "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36",
     "Referer":"https://xueqiu.com/u/7318086163",
 "Origin":"https://xueqiu.com",
-"Cookie":"aliyungf_tc=AQAAALtn9QKXtQwApjaj3Dw25XSZEYmp; acw_tc=2760824f15728600998438013e9277e278bd0a3e043573ee79284aa3de364d; xq_a_token=87993a504d5d350e6271c337ad8e9ec8809acb79; xqat=87993a504d5d350e6271c337ad8e9ec8809acb79; xq_r_token=2b9912fb63f07c0f11e94985018ad64e78cca498; u=421572860114846; device_id=24700f9f1986800ab4fcc880530dd0ed; s=cx12ga45w7"}
+"Cookie":"aliyungf_tc=AQAAADvcgn2gkgEAIg2AJ2ILVB4beQie; acw_tc=2760824915911898371164000efdf8eb61418037d9b7137956c1cd8bbceaf8; Hm_lvt_1db88642e346389874251b5a1eded6e3=1591189838; device_id=24700f9f1986800ab4fcc880530dd0ed; remember=1; xq_a_token=9ae37869331b104a8235d7a93b7eddc5ed355021; xq_id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOjIwNDAwNjA4NTcsImlzcyI6InVjIiwiZXhwIjoxNTkzNzgxOTM2LCJjdG0iOjE1OTExODk5MzY4ODIsImNpZCI6ImQ5ZDBuNEFadXAifQ.J07U5v2fiQXZcshnymRxfUG1aWLStnZS86cILZpjUiZD1hQExVLBh6xqkYFRtV6Y70DPu6cjjphP5Q7PL6TnWxB452D6Vu41Eez8fOHO6dZS6RHJ3BaPkX0O8v-v118bxERejc1bZIxfy_GFPU-up6JnmUnWDdIGnybEU-BIe5_g6T76ViB6BdZC1Nbt61WUhRRHI9gyY_2rLbo3U1xWaCnsmpOV6rFrFwyD44BDIfpESo_amiG2T1aFYdgxJazCptES4ZHhB1nOaxtz2dy4M5C3z1-fIRSF1P_sZKhZE0-aQEA_dmP8C3oJqEMOLTPVLAEM9Rz_1BLmHYPRNELhmw; xqat=9ae37869331b104a8235d7a93b7eddc5ed355021; xq_r_token=d94acb14046c2ffb70b1a7db0c8cbc156e82a209; xq_is_login=1; u=2040060857; is_overseas=0; snbim_minify=true; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1591189962"}
 
 @retry(tries=10,delay=1,backoff=2,max_delay=8)
 def get_profit(group_id):
@@ -146,6 +146,14 @@ def save_data_mysql(item,table):
     finally:
         cursor.close()
         db.close()
+
+
+def login():
+    """
+    账号登陆
+    :return:
+    """
+    pass
       
     
 def get_users():

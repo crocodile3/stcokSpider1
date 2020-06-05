@@ -24,17 +24,17 @@ import pandas as pd
 from matplotlib.dates import DateFormatter, WeekdayLocator, DayLocator, MONDAY, date2num
 from datetime import datetime
 # from mpl_finance import candlestick_ochl
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 # from candlePlot import candlePlot
 # from pyecharts import Kline
-from pyecharts import Line
+from pyecharts.charts import Line
 from sqlalchemy import create_engine
 
 basic = './Data/stock_basic.csv'
 company_basic = './Data/company_basic.csv'
 
-token = '122caaa90d62e90b164ffdcb90d83cf19bc69d230216e50fb5f6d330'
+token = '88888'
 ts.set_token(token)
 pro = ts.pro_api()
 
@@ -53,7 +53,8 @@ def get_stock_basic():
         # data = pro.stock_basic(exchange='SZSE,SSE', list_status='L')
         table = "stock_basic"
         # save_data_sql(data, table)
-        data.to_csv("stock_info.csv",mode="a")
+        print(data.head())
+        # data.to_csv("stock_info.csv",mode="a")
 
 
 def get_index_basic():
@@ -124,7 +125,14 @@ def get_lhb():
 
 
 def get_index():
+    table = 'sz_index'
     df = pro.index_daily(ts_code='000001.SH', start_date='20190101', end_date='20191231')
+    # try:
+    #     save_data_sql(df, table)
+    #     time.sleep(10)
+    # except AttributeError as e:
+    #     print("无数据！")
+
     return df
 
 
@@ -169,7 +177,7 @@ def get_bonus():
 
 
 def save_data_sql(df, table):
-    engine = create_engine("mysql+pymysql://root:cyh187977@127.0.0.1:3306/spider?charset=utf8")
+    engine = create_engine("mysql+pymysql://root:cyh981134@127.0.0.1:3306/Stock?charset=utf8")
     df.to_sql(name=table, con=engine, if_exists='append', index=False, index_label=False)
 
 
@@ -220,15 +228,20 @@ def show_index_plot():
     绘制大盘的折线图
     :return:
     """
-    data = get_index()['close'].values.tolist()[::-1]
-    index = get_index()['trade_date'].values.tolist()[::-1]
-    line = Line("折线图示例")
-    line.add(
-        "大盘指数",
-        index,
-        data,
-    )
-    line.render('index.html')
+    # data = get_index()['close'].values.tolist()[::-1]
+    # index = get_index()['trade_date'].values.tolist()[::-1]
+    # df = pd.DataFrame(data,index=index)
+    # df.plot()
+    # plt.show()
+    df = get_index()
+    index = df.index
+    df.close.plot()
+    df.close.rolling(30).mean().plot()
+    df.close.rolling(60).mean().plot()
+    df.close.rolling(90).mean().plot()
+    plt.legend(['close','30mv','60mv','90mv'])
+    plt.title('上证指数')
+    plt.show()
 
 
 if __name__ == '__main__':
@@ -238,7 +251,7 @@ if __name__ == '__main__':
     # calculate_change_percent(data)
     # save_data_sql(data,"stock_index")
     # draw_index_kandle(data)
-    # get_stock_basic()
+    get_stock_basic()
     # codes = read_stock_codes()
     
     # get_day_data(codes)
@@ -248,4 +261,4 @@ if __name__ == '__main__':
     # get_index_basic()
     # get_index()
     # get_fund_basic()
-    show_index_plot()
+    # show_index_plot()

@@ -29,7 +29,7 @@ import json
 
 import requests
 
-from spider.render_test import tmp
+#from spider.render_test import tmp
 
 
 class Pusher:
@@ -64,7 +64,7 @@ class Pusher:
 
 if __name__ == '__main__':
     type = 2
-    content = tmp
+    content = "这是测试信息"
     pusher = Pusher()
     pusher.post(type,content)
 
